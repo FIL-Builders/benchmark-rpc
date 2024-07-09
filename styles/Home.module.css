@@ -1,20 +1,51 @@
 .container {
-  padding: 0 2rem;
+  padding: 2rem 4rem;
+  color: white;
+  
 }
 
 .title {
-  margin: 4rem 0;
+  margin: 1rem 0;
   text-align: center;
-}
-
-.section {
-  margin-bottom: 4rem;
+  font-size: 5rem;
 }
 
 .content {
+  text-align: center;
   margin-bottom: 2rem;
   font-size: 1.2rem;
   line-height: 1.5;
 }
+
+.decor {
+  border-bottom: 1px solid;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0;
+  }
+
+  .title {
+    font-size: 3rem; 
+    font-weight: 600;
+    margin: 0.5rem 0; 
+  }
+
+  .content {
+    font-size: 0.8rem;
+    padding: 0.2rem;
+  }
+
+}
+
 
 

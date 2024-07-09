@@ -22,3 +22,9 @@
   max-width: 100px;
   word-wrap: break-word;
 }
+
+.legend {
+  display: flex;
+  gap: 5px;
+}
+

@@ -138,8 +138,9 @@ const fetchBenchmarkData = async (rpcUrls, rpcMethods) => {
 const Home = () => {
   return (
     <div className={styles.container}>
-      <h1 className="title is-1">RPC Benchmark</h1>
-      <div className="content">
+      <div className={styles.decor}> 
+      <h1 className={styles.title}>RPC Benchmark</h1>
+      <div className={styles.content}>
         <p>
           This application benchmarks various Ethereum JSON-RPC endpoints. It performs multiple tasks such as fetching block numbers, block details, transaction details, and more.
         </p>
@@ -152,6 +153,7 @@ const Home = () => {
         <p>
           Source code available on <a href="https://github.com/snissn/benchmark-rpc" target="_blank" rel="noopener noreferrer">GitHub</a>.
         </p>
+      </div>
       </div>
       <BenchmarkSection
         title="Filecoin ETH RPC Benchmark"
