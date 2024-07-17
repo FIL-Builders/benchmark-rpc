@@ -63,55 +63,101 @@ const Grid = ({ data }) => {
         <span className="tag is-warning">201 - 500 ms</span>
         <span className="tag is-danger"> &gt; 500 ms</span>
       </div>
-      <table className={`table is-fullwidth is-striped is-hoverable ${styles.borderedTable}`}>
+      <table
+        className={`table is-fullwidth is-striped is-hoverable ${styles.borderedTable}`}
+      >
         <thead>
           <tr>
-            <th>Method</th>
+            <th
+              style={{ borderRight: "1px solid #ccc" }}
+            >
+              Method
+            </th>
             {data.map((result, index) => (
-              <th className={`${styles.rpcUrl}`} key={index}>{result.rpcUrl}</th>
+              <th
+                className={`${styles.tableHeader} ${styles.rpcUrl}`}
+                key={index}
+                style={{ borderRight: "1px solid #ccc" }}
+              >
+                {result.rpcUrl}
+              </th>
             ))}
-            <th>Average</th>
-            <th>Median</th>
+            <th
+              style={{ borderRight: "1px solid #ccc" }}
+            >
+              Average
+            </th>
+            <th
+              style={{ borderRight: "1px solid #ccc" }}
+            >
+              Median
+            </th>
           </tr>
         </thead>
         <tbody>
-          {data.length > 0 && data[0].responses.map((response, index) => {
-            const methodTimes = getMethodTimes(index);
-            const methodAverage = calculateAverage(methodTimes);
-            const methodMedian = calculateMedian(methodTimes);
+          {data.length > 0 &&
+            data[0].responses.map((response, index) => {
+              const methodTimes = getMethodTimes(index);
+              const methodAverage = calculateAverage(methodTimes);
+              const methodMedian = calculateMedian(methodTimes);
 
-            return (
-              <tr key={index}>
-                <td>{response.method}</td>
-                {data.map((result, i) => (
-                  <td key={i} className={getColorClass(result.responses[index].time)}>
-                    {result.responses[index].error ? `❌ ${result.responses[index].errorMessage}` : `${result.responses[index].time.toFixed(2)} ms`}
+              return (
+                <tr key={index}>
+                  <td>{response.method}</td>
+                  {data.map((result, i) => (
+                    <td
+                      key={i}
+                      className={getColorClass(result.responses[index].time)}
+                    >
+                      {result.responses[index].error
+                        ? `❌ ${result.responses[index].errorMessage}`
+                        : `${result.responses[index].time.toFixed(2)} ms`}
+                    </td>
+                  ))}
+                  <td className={getColorClass(methodAverage)}>
+                    {`${methodAverage}`} ms
                   </td>
-                ))}
-                <td className={getColorClass(methodAverage)}>{`${methodAverage}`} ms</td>
-                <td className={getColorClass(methodMedian)}>{`${methodMedian}`} ms</td>
-              </tr>
-            );
-          })}
+                  <td className={getColorClass(methodMedian)}>
+                    {`${methodMedian}`} ms
+                  </td>
+                </tr>
+              );
+            })}
           {data.length > 0 && (
             <>
               <tr>
                 <td>Summary Average</td>
                 {data.map((result, index) => {
-                  const times = result.responses.filter(response => !response.error).map(response => response.time);
+                  const times = result.responses
+                    .filter((response) => !response.error)
+                    .map((response) => response.time);
                   const average = calculateAverage(times);
-                  return <td key={index} className={getColorClass(average)}>{average} ms</td>;
+                  return (
+                    <td key={index} className={getColorClass(average)}>
+                      {average} ms
+                    </td>
+                  );
                 })}
-                <td colSpan="2" className={getColorClass(averageOfAverages)}>{averageOfAverages} ms</td>
+                <td colSpan="2" className={getColorClass(averageOfAverages)}>
+                  {averageOfAverages} ms
+                </td>
               </tr>
               <tr>
-                <td>Summary Median</td>
+                <td style={{ borderBottom: '1px solid' }}>Summary Median</td>
                 {data.map((result, index) => {
-                  const times = result.responses.filter(response => !response.error).map(response => response.time);
+                  const times = result.responses
+                    .filter((response) => !response.error)
+                    .map((response) => response.time);
                   const median = calculateMedian(times);
-                  return <td key={index} className={getColorClass(median)}>{median} ms</td>;
+                  return (
+                    <td key={index} className={getColorClass(median)}>
+                      {median} ms
+                    </td>
+                  );
                 })}
-                <td colSpan="2" className={getColorClass(medianOfMedians)}>{medianOfMedians} ms</td>
+                <td colSpan="2" className={getColorClass(medianOfMedians)}>
+                  {medianOfMedians} ms
+                </td>
               </tr>
             </>
           )}
